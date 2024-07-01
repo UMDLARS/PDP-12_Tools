@@ -1,0 +1,3 @@
+[submodule "os8diskserver"]
+	path = os8diskserver
+	url = git@github.com:drovak/os8diskserver.git
