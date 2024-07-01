@@ -1,3 +1,6 @@
 [submodule "os8diskserver"]
 	path = os8diskserver
 	url = git@github.com:drovak/os8diskserver.git
+[submodule "minicom"]
+	path = minicom
+	url = git@github.com:UMDLARS/minicom.git
