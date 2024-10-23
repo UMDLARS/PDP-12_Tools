@@ -4,3 +4,6 @@
 [submodule "minicom"]
 	path = minicom
 	url = git@github.com:UMDLARS/minicom.git
+[submodule "simh"]
+	path = simh
+	url = git@github.com:simh/simh.git
