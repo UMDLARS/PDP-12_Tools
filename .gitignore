@@ -2,4 +2,5 @@
 disks
 
 # SerialDisk server log
-server.log
+./diskserver-env/simh/server.log
+./diskserver-env/pdp12/server.log
