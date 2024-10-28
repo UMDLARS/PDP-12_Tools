@@ -1,6 +1,7 @@
 #!/bin/sh
 
-cd $(dirname $0)
+TOOLS_ROOT_DIR=$(readlink -f $(dirname $0))
+cd $TOOLS_ROOT_DIR/diskserver-env/simh
 
 # Run simh
-./simh/BIN/pdp8
+$TOOLS_ROOT_DIR/simh/BIN/pdp8
