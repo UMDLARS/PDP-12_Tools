@@ -9,7 +9,7 @@ This repository contains a set of tools for working with UMD's PDP-12 computer. 
 ## Setup
 If you have not already, clone this repo somewhere using:
 ```
-git@github.com:UMDLARS/PDP-12_Tools.git
+git clone git@github.com:UMDLARS/PDP-12_Tools.git
 ```
 
 With the repo cloned, you can run the setup script.
