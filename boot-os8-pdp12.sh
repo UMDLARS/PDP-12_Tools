@@ -15,4 +15,4 @@ SERVER_PID="$!"
 trap 'kill "$SERVER_PID" 2> /dev/null' EXIT
 
 # Run minicom on ttyUSB1
-$TOOLS_ROOT_DIR/minicom/src/minicom -D /dev/ttyUSB1
+$TOOLS_ROOT_DIR/minicom/src/minicom -D /dev/ttyUSB1 PDP12
