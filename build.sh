@@ -3,7 +3,7 @@
 cd $(dirname $0)
 
 # Build os8diskserver
-./os8diskserver/makeos8diskserver
+make -C ./os8diskserver/SerialDisk/server
 
 # Build simh
 make -C simh pdp8
