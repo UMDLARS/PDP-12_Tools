@@ -1,0 +1,7 @@
+# Machine-generated file - use setup menu in minicom to change parameters.
+pu pprog9           ascii-xfr -dnsv
+pu baudrate         19200
+pu stopbits         2
+pu backspace        DEL
+pu rtscts           Yes
+pu convf            /mnt/storage/zachary/minicom-trans-table/7bit-high8th.tbl
