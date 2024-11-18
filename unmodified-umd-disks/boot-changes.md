@@ -95,7 +95,7 @@ If this directory does exist, make sure it is empty.
 Create copies of the following within the `disks` directory:
 * Your `ock.rk05.new` to `disks/boot-pdp12.rk05` and/or `disks/boot-simh.rk05`, depending on whether you'll be using the PDP-12 or SIMH for this process.
 * `unmodified-umd-disks/blank.rk05` to `disks/games.rk05`
-* `unmodified-umd-disks/handlers.rk05` to `disks/disk3.rk05`
+* `unmodified-umd-disks/umd-resource` to `disks/disk3.rk05`
 * An untouched copy of your `ock.rk05` to `disks/disk4.rk05`
 
 Now, perform the instructions in this repository's main readme to boot OS/8 on the PDP-12 or in SIMH.
@@ -318,8 +318,8 @@ DSK=RK8E:RKB0
 ```
 
 Now, we can add our handlers.
-This section assumes that the first half of disk 3 (`disk3.rk05` under `disks`) contains built handlers (e.g., is a copy of `unmodified-umd-disks/handlers.rk05`).
-All of the handlers except the SerialDisk handlers are present on SDA2 (second side of `disk3.rk05`/`handlers.rk05`).
+This section assumes that the first half of disk 3 (`disk3.rk05` under `disks`) contains built handlers (e.g., is a copy of `unmodified-umd-disks/umd-resource.rk05`).
+All of the handlers except the SerialDisk handlers are present on SDA2 (second side of `disk3.rk05`/`umd-resource.rk05`).
 The SerialDisk handlers will still be on SYS from earlier.
 
 #### Common Handlers
@@ -414,7 +414,7 @@ Finally, we can save `BUILD` so that we don't have to redo everything if/when we
 
 ### Setting Up The Games Disk
 This section assumes that an undisturbed copy of `ock.rk05` from the PiDP-8/I project is mounted as disk 4 (`ock.rk05` is `disks/disk4.rk05`).
-Additionally, it is assumed that disk 3 is the handlers disk (`unmodified-umd-disks/handlers.rk05` is `disks/disk3.rk05`).
+Additionally, it is assumed that disk 3 is the UMD resource disk (`unmodified-umd-disks/umd-resource.rk05` is `disks/disk3.rk05`).
 
 To setup the `games.rk05` games disk, we will simply copy the contents of the second half of the `ock.rk05` disk (should be mounted as `disk4.rk05`) to the games disk:
 ```
@@ -436,7 +436,7 @@ By default, the PiDP-8/I project does not include these libraries, but we can ad
 Additionally, the PiDP-8/I includes the `CLK8A` library, which doesn't work on the PDP-12, instead of the `CLOCK` library.
 We can also replace the `CLK8A` library with the `CLOCK` library.
 
-This section assumes that disk 3 is the handlers disk (`unmodified-umd-disks/handlers.rk05` is `disks/disk3.rk05`).
+This section assumes that disk 3 is the UMD resource disk (`unmodified-umd-disks/umd-resource.rk05` is `disks/disk3.rk05`).
 
 First, we'll compile the necessary FORTRAN libraries:
 ```
