@@ -414,7 +414,7 @@ Finally, we can save `BUILD` so that we don't have to redo everything if/when we
 
 ### Setting Up The Games Disk
 This section assumes that an undisturbed copy of `ock.rk05` from the PiDP-8/I project is mounted as disk 4 (`ock.rk05` is `disks/disk4.rk05`).
-Additionally, it is assumed that disk 3 is the handlers disk (`unmodified-umd-disks/handlers.rk05` is `disks/disk3.rk05).
+Additionally, it is assumed that disk 3 is the handlers disk (`unmodified-umd-disks/handlers.rk05` is `disks/disk3.rk05`).
 
 To setup the `games.rk05` games disk, we will simply copy the contents of the second half of the `ock.rk05` disk (should be mounted as `disk4.rk05`) to the games disk:
 ```
@@ -430,3 +430,78 @@ ERRORS DETECTED: 0
 LINKS GENERATED: 106
 ```
 
+### Adding PDP-12 FORTRAN Libraries
+There are a few PDP-12 specific FORTRAN libraries that allow the use of PDP-12 specific features within FORTRAN.
+By default, the PiDP-8/I project does not include these libraries, but we can add them.
+Additionally, the PiDP-8/I includes the `CLK8A` library, which doesn't work on the PDP-12, instead of the `CLOCK` library.
+We can also replace the `CLK8A` library with the `CLOCK` library.
+
+This section assumes that disk 3 is the handlers disk (`unmodified-umd-disks/handlers.rk05` is `disks/disk3.rk05`).
+
+First, we'll compile the necessary FORTRAN libraries:
+```
+.COMPILE ADC<SDB2:ADC.RA
+.COMPILE CLOCK<SDB2:CLOCK.RA
+.COMPILE PLOT<SDB2:PLOT.RA
+.COMPILE REALTM<SDB2:REALTM.RA
+```
+
+Now we'll create a copy of `SYS:FORLIB.RL` with these new libraries added using `LIBRA`:
+```
+.R LIBRA
+*FORLIB.RL,TTY:<SYS:FORLIB.RL,DSK:ADC.RL,CLOCK.RL,PLOT.RL,REALTM.RL/R
+```
+
+The output of the above should look something like this:
+```
+SYNC IS DUPLICATE NAME
+CLOCK IS DUPLICATE NAME
+#CLINT IS DUPLICATE NAME
+TIME IS DUPLICATE NAME
+
+LIBRA V 24A  CATALOG OF FORLIB.RL
+
+IABS    ABS     SIGN    ISIGN   AMIN0   AMIN1   MIN0    MIN1
+AMAX0   AMAX1   MAX0    MAX1    DIM     IDIM    EXP     EXP3
+SIN     COS     TAN     TANH    SQRT    ASIN    ACOS    ATAN
+FLOAT   CHARS   CHAR    CGET    CPUT    CHKEOF  ALOG10  DATE
+ATAN2   IFIX    AINT    INT     SINH    ALOG    COSH    AMOD
+MOD     #LTR    #EQ     #NE     #GE     #LE     #GT     #LT
+#EXPII  #RFCV   #WFCV   #RFDV   #PAUSE  #EXPIR  #FIX    ONQI
+ONQB    ADC     SYNC    CLOCK   #CLINT  TIME    PLOT    PLOTR
+CLRPLT  SCALE   #DISP   SAMPLE  REALTM  ADB
+```
+
+`LIBRA` can be exited using Ctrl+C, then we can replace `SYS:FORLIB.RL` with our newly created `FORLIB.RL`:
+```
+.DEL SYS:FORLIB.RL
+Files deleted:
+FORLIB.RL
+
+.COPY SYS:<DSK:FORLIB.RL
+FILES COPIED:
+FORLIB.RL
+```
+
+Finally, we can cleanup the files we don't need anymore:
+```
+.DEL ADC.RL,CLOCK.RL,PLOT.RL,REALTM.RL,FORLIB.RL
+```
+
+If using actual PDP-12 hardware, the following example from the OS/8 handbook can be used to test the scope/display, clock, and analog channel sampling:
+```
+        DIMENSION PLTBUF(400),DATBUF(50)
+1       CALL CLRPLT(400,PLTBUF)
+        CALL REALTM(DATBUF,50,3,1,500)
+        CALL CLOCK(8,10)
+        DO 100 I=1,500
+100     CALL PLOT(1,I/384.,ADB(X)/1024.+.5)
+C       NOW PAUSE SO THAT POINTS WILL BE DISPLAYED
+        READ(4,10)Q
+10      FORMAT(I2)
+        GO TO 1
+        STOP
+        END
+```
+
+This example will sample data from analog channel 3 (the knob labeled "3" under "ANALOG CHANNELS 0-7") for 50 seconds, then display a fancy line on the scope/display.
