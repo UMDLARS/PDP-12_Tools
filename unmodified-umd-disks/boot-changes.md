@@ -12,7 +12,7 @@ TODO: Be more specific, atm I don't want to forget what I've done:
 * 8tools: https://svn.so-much-stuff.com/svn/trunk/pdp8/8tools/
 * os8diskserver (included in this repo): https://github.com/drovak/os8diskserver
 * PDP-8 simh (we suggest git commit 524a98b): https://github.com/simh/simh
-* ock.rk05 OS/8 image from the PiDP-8/I project: https://tangentsoft.com/pidp8i/wiki?name=Home
+* "OCK boot" ock.rk05 OS/8 image from the PiDP-8/I project: https://tangentsoft.com/pidp8i/wiki?name=Home
 * OS/8 FORTRAN IV LIBRARY Sources (we used those from the PiDP-8/I project under `src/os8/ock/LANGUAGE/FORTRAN4/`).
 
 ## Disable The Init Script
@@ -102,11 +102,11 @@ Now, perform the instructions in this repository's main readme to boot OS/8 on t
 
 Now running OS/8, we use the following commands to compile both of the SerialDisk handlers:
 ```
-COMPILE SYS:<SYS:SDSKSY.PA
-COMPILE SYS:<SYS:SDSKNS.PA
+.COMPILE SYS:<SYS:SDSKSY.PA
+.COMPILE SYS:<SYS:SDSKNS.PA
 ```
 
-The output of these should look like this:
+The output of these commands should look like this:
 ```
 .COMPILE SYS:<SYS:SDSKSY.PA
 ERRORS DETECTED: 0
@@ -135,7 +135,7 @@ UWF16K.SV  24               SDSKSY.BN   1               SDSKNS.BN   2
 ```
 
 ### Installing the SerialDisk Handlers
-With the SerialDisk handlers built, we can now install them using BUILD.
+With the SerialDisk handlers built, we can now install them using `BUILD`.
 
 First, start `BUILD` using `RUN SYS BUILD`.
 This should bring up a new `$` prompt, if we execute `PR` (or `PRINT`) we should see something like this:
@@ -223,8 +223,8 @@ SDNS:  SDA0  SDB0  SDA1  SDB1 *SDA2 *SDB2  SDA3  SDB3
 DSK=SDSY:SDB0
 ```
 
-We can now exit out of build using the `BOOT` command.W
-hen `WRITE ZERO DIRECT?` comes up, press the enter/return key:
+We can now exit out of build using the `BOOT` command.
+When `WRITE ZERO DIRECT?` comes up, press the enter/return key:
 ```
 $BOOT
 WRITE ZERO DIRECT?
@@ -235,7 +235,8 @@ SYS BUILT
 Note: We do not save `BUILD` right now, as for whatever reason it breaks `BUILD`?
 We will save it later after also cleaning up the loaded handlers.
 
-At this point, all of the SerialDisk devices should be usable, for instance you should be able to use `DIR SDA2:` and have it show the following:
+At this point, `SDA0`, `SDB0`, `SDA2`, and `SDB2` should be usable.
+You should be able to use `DIR SDA2:` and have it show the following:
 ```
 .DIR SDA2:
 
@@ -265,7 +266,7 @@ VXNS  .PA  14               VXSY  .PA  14
 To be able to use additional features of the PDP-12 and SIMH, we will want to install some additional handlers.
 The handlers we will install will depend on whether the boot image is intended to primarily target the PDP-12 or SIMH.
 
-Note: Building an image targetting the PDP-12 with PDP-12 handlers using SIMH works fine, so does building a SIMH image with SIMH handler using the PDP-12.
+Note: Building an image targetting the PDP-12 with PDP-12 handlers using SIMH works fine, so does building a SIMH image with SIMH handlers using the PDP-12.
 
 We will first run `BUILD` again using `RUN SYS BUILD`:
 ```
@@ -309,7 +310,7 @@ $UN ROM
 $UN TD8A
 ```
 
-The `PR` command will now show nothing:
+The `PR` command should now show nothing aside from `DSK`:
 ```
 $PR
 
@@ -332,7 +333,7 @@ The common handlers can be installed and enabled with:
 ```
 $LO SYS:SDSKSY
 $LO SYS:SDSKNS
-$LO SDB2:KL8E
+$LO SDA2:KL8E
 $IN SDSY:SYS,SDA0,SDB0
 $IN SDNS:SDA1,SDB1,SDA2,SDB2,SDA3,D\D\SDB3
 $IN KL8E:TTY
@@ -349,7 +350,7 @@ On the PDP-12 we install and enable the following additional handlers:
 * `KS33[PTR]`: Paper Tape Handler.
 * `VR12[TV]`: Scope/Display/TV Handler.
 
-The PDP-12 handlers can be installed using:
+The PDP-12 handlers can be installed and enabled using:
 ```
 $LO SDA2:LINCNS
 $LO SDA2:LSPT
@@ -433,7 +434,7 @@ LINKS GENERATED: 106
 ### Adding PDP-12 FORTRAN Libraries
 There are a few PDP-12 specific FORTRAN libraries that allow the use of PDP-12 specific features within FORTRAN.
 By default, the PiDP-8/I project does not include these libraries, but we can add them.
-Additionally, the PiDP-8/I includes the `CLK8A` library, which doesn't work on the PDP-12, instead of the `CLOCK` library.
+Additionally, PiDP-8/I includes the `CLK8A` library, which doesn't work on the PDP-12, instead of the `CLOCK` library.
 We can also replace the `CLK8A` library with the `CLOCK` library.
 
 This section assumes that disk 3 is the UMD resource disk (`unmodified-umd-disks/umd-resource.rk05` is `disks/disk3.rk05`).
