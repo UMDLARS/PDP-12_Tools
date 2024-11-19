@@ -55,14 +55,14 @@ On the PDP-12, punch in the RIM Loader, then with the RIM Loader running, execut
 ./send-os8-bootloader-pdp12.sh
 ```
 
-
-Stop the RIM Loader and start the OS/8 bootloader by pressing the Start 20 switch.
 Then on your computer, run the `boot-os8-pdp12.sh` script:
 ```
 ./boot-os8-pdp12.sh
 ```
 
-You should now have a minicom window that you can run OS/8 commands in.
+Stop the RIM Loader and start the OS/8 bootloader by pressing the Start 20 switch.
+
+You should now have a OS/8 command prompt on the minicom window opened by `boot-os8-pdp12.sh`.
 
 ### Booting OS/8 under simh
 To boot OS/8 under simh, simply execute the `boot-os8-simh.sh` script:
