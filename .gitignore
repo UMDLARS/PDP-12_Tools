@@ -1,6 +1,9 @@
 # User disk images
-disks
+./os8-disk-server/disks
+
+# 8tools
+./8tools
 
 # SerialDisk server log
-./diskserver-env/simh/server.log
-./diskserver-env/pdp12/server.log
+./os8-disk-server/diskserver-env/simh/server.log
+./os8-disk-server/diskserver-env/pdp12/server.log
