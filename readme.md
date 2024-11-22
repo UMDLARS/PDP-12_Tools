@@ -7,7 +7,7 @@ This repository contains a set of tools for working with UMD's PDP-12 computer. 
 * A set of scripts for booting os/8 both on UMD's PDP-12 as well as simh.
 
 ## Dependencies
-* Ubuntu (22.04+)/Debian (12+): `sudo apt install build-essential autoconf gettext pkgconf ncurses-dev`
+* Ubuntu (22.04+)/Debian (12+): `sudo apt install build-essential autoconf gettext pkgconf ncurses-dev git-svn`
 
 ## Setup
 If you have not already, clone this repo somewhere using:
@@ -18,18 +18,15 @@ git clone git@github.com:UMDLARS/PDP-12_Tools.git --recursive
 With the repo cloned, you can run the setup script.
 This script will compile everything and create a copies of the os/8 rk05 disk images:
 ```
-./setup.sh
+./scripts/setup.sh
 ```
 
 ## Updating
-To update this repo, simply pull the latest commit:
+To update this repo, you may use the update script
+
+WARNING: This will reset any modifications you have made to files in this repo or its subrepos. Added files, like your os8 disks, will be kept
 ```
-git pull
-git submodule update --recursive
-```
-Then run the build script to rebuild everything:
-```
-./build.sh
+./scripts/update.sh
 ```
 
 ## OS/8
@@ -53,31 +50,31 @@ sudo reboot
 ```
 
 Now you'll need to send the OS/8 bootloader.
-On the PDP-12, punch in the RIM Loader, then with the RIM Loader running, execute the `send-os8-bootloader-pdp12.sh` script in this repo:
+On the PDP-12, punch in the RIM Loader, then with the RIM Loader running, execute the `os8-send-bootloader.pdp12.sh` script in this repo:
 ```
-./send-os8-bootloader-pdp12.sh
+./scripts/os8-send-bootloader.pdp12.sh
 ```
 
-Then on your computer, run the `boot-os8-pdp12.sh` script:
+Then on your computer, run the `os8-boot.pdp12.sh` script:
 ```
-./boot-os8-pdp12.sh
+./scripts/os8-boot.pdp12.sh
 ```
 
 Stop the RIM Loader and start the OS/8 bootloader by pressing the Start 20 switch.
 
-You should now have a OS/8 command prompt on the minicom window opened by `boot-os8-pdp12.sh`.
+You should now have a OS/8 command prompt on the minicom window opened by `os8-boot.pdp12.sh`.
 
 ### Booting OS/8 under simh
-To boot OS/8 under simh, simply execute the `boot-os8-simh.sh` script:
+To boot OS/8 under simh, simply execute the `os8-boot.simh.sh` script:
 ```
-./boot-os8-simh.sh
+./os8-boot.simh.sh
 ```
 
 You should now have a simh window that you can run OS/8 commands in.
 
 ### Restoring disks to their default states
-The `restore-disk-images.sh` script can be used to restore the OS/8 disk images to their default states:
+The `os8-restore-disks.sh` script can be used to restore the OS/8 disk images to their default states:
 ```
-./restore-disk-images.sh
+./scripts/os8-restore-disks.sh
 ```
 
