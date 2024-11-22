@@ -1,19 +1,13 @@
 # Boot Disk Image Generation
 Our OS/8 boot and games are derived from the "OCK boot" OS/8 disk image provided by the PiDP-8/I project.
 
-TODO: Be more specific, atm I don't want to forget what I've done:
-* SET SYS NO INIT
-* PDP-12 Handlers: SDSY, SDNS, LNC, KL8E, KS33, VR12
-* SIMH Handlers: SDSY, SDNS, TC08, KL8E, PT8E
-* FORLIB.RL: Added ADC, CLOCK, PLOT, REALTM
-
 ## Required Resources
 * This repository.
 * 8tools: https://svn.so-much-stuff.com/svn/trunk/pdp8/8tools/
 * os8diskserver (included in this repo): https://github.com/drovak/os8diskserver
-* PDP-8 simh (we suggest git commit 524a98b): https://github.com/simh/simh
+* PDP-8 simh (we suggest git commit 524a98b; included in this repo): https://github.com/simh/simh
 * "OCK boot" ock.rk05 OS/8 image from the PiDP-8/I project: https://tangentsoft.com/pidp8i/wiki?name=Home
-* OS/8 FORTRAN IV LIBRARY Sources (we used those from the PiDP-8/I project under `src/os8/ock/LANGUAGE/FORTRAN4/`).
+* OS/8 FORTRAN IV LIBRARY Sources (we used those from the PiDP-8/I project under `src/os8/ock/LANGUAGE/FORTRAN4/`; these are included on the second side of the `disks/umd-resource.rk05` disk image in this repo).
 
 ## Disable The Init Script
 The mitigate some issues later, we'll want to first disable the INIT script provided by the PiDP-8/I ock.rk05 image. To do this, we'll use simh to execute the `SET SYS NO INIT` command on the image.
@@ -335,7 +329,7 @@ $LO SYS:SDSKSY
 $LO SYS:SDSKNS
 $LO SDA2:KL8E
 $IN SDSY:SYS,SDA0,SDB0
-$IN SDNS:SDA1,SDB1,SDA2,SDB2,SDA3,D\D\SDB3
+$IN SDNS:SDA1,SDB1,SDA2,SDB2,SDA3,SDB3
 $IN KL8E:TTY
 ```
 
