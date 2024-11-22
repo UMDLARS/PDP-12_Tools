@@ -5,8 +5,8 @@ cd $(dirname $0)
 #rm -rf disks
 
 # Create directory if needed.
-if [ ! -d "disks" ]; then
-    mkdir "disks"
+if [ ! -d "$TOOLS_DIR_DIR/disks" ]; then
+    mkdir "$TOOLS_DIR_DIR/disks"
 fi
 
 cp $TOOLS_ROOT_DIR/resources/unmodified-umd-disks/boot-pdp12.rk05 $TOOLS_ROOT_DIR/disks/
