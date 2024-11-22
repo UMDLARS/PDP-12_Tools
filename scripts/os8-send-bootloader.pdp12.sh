@@ -1,9 +1,11 @@
 #!/bin/sh
 
 TOOLS_ROOT_DIR=$(readlink -f $(dirname $0))/..
+source $TOOLS_ROOT_DIR/scripts/detail/path-variables.sh
+source $TOOLS_ROOT_DIR/scripts/detail/tty-config.sh
 
-# Setup ttyUSB1 the same way minicom does.
-stty -F /dev/ttyUSB1 ospeed 19200 ispeed 19200 ignbrk -brkint -icrnl -imaxbel -opost -onlcr -isig -icanon -iexten -echo -echoe -echok -echoctl -echoke cstopb -ixon time 5
+# Setup tty device the same way minicom does.
+stty -F $CONFIG_TTY_DEVICE ospeed 19200 ispeed 19200 ignbrk -brkint -icrnl -imaxbel -opost -onlcr -isig -icanon -iexten -echo -echoe -echok -echoctl -echoke cstopb -ixon time 5
 
 # Send the bootloader.
-$TOOLS_ROOT_DIR/minicom/src/ascii-xfr -dnsv $TOOLS_ROOT_DIR/os8-disk-server/os8diskserver/SerialDisk/bootloader/bootloader.rim > /dev/ttyUSB1
+$MINICOM_DIR/src/ascii-xfr -dnsv $DSKSRV_DIR/SerialDisk/bootloader/bootloader.rim > $CONFIG_TTY_DEVICE

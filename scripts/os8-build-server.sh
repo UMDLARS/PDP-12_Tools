@@ -1,5 +1,6 @@
 #!/bin/sh
 
 TOOLS_ROOT_DIR=$(readlink -f $(dirname $0))/..
+source $TOOLS_ROOT_DIR/scripts/detail/path-variables.sh
 
-make -C $TOOLS_ROOT_DIR/os8-disk-server/os8diskserver/SerialDisk/server
+make -C $DSKSRV_DIR/SerialDisk/server
