@@ -4,13 +4,10 @@ TOOLS_ROOT_DIR=$(readlink -f $(dirname $0))/..
 cd $(dirname $0)/..
 
 # Build minicom
-cd $TOOLS_ROOT_DIR/minicom
-./autogen.sh
-./configure
-make -j$(nproc)
+$TOOLS_ROOT_DIR/scripts/minicom-build.sh
 
 # Build os8diskserver
-make -C $TOOLS_ROOT_DIR/os8diskserver/SerialDisk/server
+$TOOLS_ROOT_DIR/scripts/os8-build-server.sh
 
 # Build simh
-make -C $TOOLS_ROOT_DIR/simh pdp8
+$TOOLS_ROOT_DIR/scripts/simh-build.sh
