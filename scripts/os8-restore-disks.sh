@@ -8,8 +8,6 @@ if [ ! -d $DSKSRV_DISKS_DIR ]; then
     mkdir $DSKSRV_DISKS_DIR
 fi
 
-echo $
-
 cp $RES_UNMODIF_DISKS_DIR/boot-pdp12.rk05 $DSKSRV_DISKS_DIR/
 cp $RES_UNMODIF_DISKS_DIR/boot-simh.rk05 $DSKSRV_DISKS_DIR/
 cp $RES_UNMODIF_DISKS_DIR/games.rk05 $DSKSRV_DISKS_DIR/
