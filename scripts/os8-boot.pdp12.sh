@@ -14,5 +14,5 @@ SERVER_PID="$!"
 # Trap on exit to kill the disk server.
 trap 'kill "$SERVER_PID" 2> /dev/null' EXIT
 
-# Run minicom on ttyUSB1
-$TOOLS_ROOT_DIR/minicom/src/minicom -D /dev/ttyUSB1 PDP12
+# Run minicom.
+$TOOLS_ROOT_DIR/scripts/minicom-run.sh
