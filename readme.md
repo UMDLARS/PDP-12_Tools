@@ -6,6 +6,9 @@ This repository contains a set of tools for working with UMD's PDP-12 computer. 
 * A set of rk05 disk images containing os/8, games, and system handlers.
 * A set of scripts for booting os/8 both on UMD's PDP-12 as well as simh.
 
+## Dependencies
+* Ubuntu (22.04+)/Debian (12+): `sudo apt install build-essential autoconf gettext pkgconf ncurses-dev`
+
 ## Setup
 If you have not already, clone this repo somewhere using:
 ```
