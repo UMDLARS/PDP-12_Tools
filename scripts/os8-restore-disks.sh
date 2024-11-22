@@ -5,7 +5,7 @@ cd $(dirname $0)
 #rm -rf disks
 
 DISKS_DIR=$TOOLS_ROOT_DIR/os8-disk-server/disks
-UNMODIF_DISK_DIR=$TOOLS_ROOT_DIR/resources/unmodified-umd-disks
+UNMODIF_DISKS_DIR=$TOOLS_ROOT_DIR/resources/unmodified-umd-disks
 
 # Create directory if needed.
 if [ ! -d $DISKS_DIR ]; then
