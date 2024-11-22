@@ -1,12 +1,12 @@
 #!/bin/bash
 
 TOOLS_ROOT_DIR=$(readlink -f $(dirname $0))/..
-cd $TOOLS_ROOT_DIR/diskserver-env/pdp12
+cd $TOOLS_ROOT_DIR/os8-disk-server/diskserver-env/simh
 
-echo $TOOLS_ROOT_DIR
+DISKS_DIR=$TOOLS_ROOT_DIR/os8-disk-server/disks
 
 # Run os8diskserver in the background.
-$TOOLS_ROOT_DIR/os8diskserver/SerialDisk/server/server -1 $TOOLS_ROOT_DIR/disks/boot-pdp12.rk05 -2 $TOOLS_ROOT_DIR/disks/games.rk05 -3 $TOOLS_ROOT_DIR/disks/disk3.rk05 -4 $TOOLS_ROOT_DIR/disks/disk4.rk05 >/dev/null 2>/dev/null &
+$TOOLS_ROOT_DIR/os8-disk-server/os8diskserver/SerialDisk/server/server -1 $DISKS_DIR/boot-pdp12.rk05 -2 $DISKS_DIR/games.rk05 -3 $DISKS_DIR/disk3.rk05 -4 $DISKS_DIR/disk4.rk05 >/dev/null 2>/dev/null &
 
 # Save disk server pid.
 SERVER_PID="$!"
