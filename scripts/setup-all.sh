@@ -1,10 +1,10 @@
 #!/bin/sh
 
 # Setup minicom config.
-./update-minicom-config.sh
+./minicom-update-config.sh
 
 # Make a copy of the disk images.
-./restore-disk-images.sh
+./os8-restore-disks.sh
 
 # Build everything.
-./build.sh
+./build-all.sh
