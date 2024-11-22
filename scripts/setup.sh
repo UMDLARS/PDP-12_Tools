@@ -1,13 +1,15 @@
 #!/bin/sh
 
+TOOLS_ROOT_DIR=$(readlink -f $(dirname $0))/..
+
 # Setup minicom config.
-./minicom-update-config.sh
+$TOOLS_ROOT_DIR/scripts/minicom-update-config.sh
 
 # Make a copy of the disk images.
-./os8-restore-disks.sh
+$TOOLS_ROOT_DIR/scripts/os8-restore-disks.sh
 
 # Clone 8tools
-./8tools-setup.sh
+$TOOLS_ROOT_DIR/scripts/8tools-setup.sh
 
 # Build everything.
-./build-all.sh
+$TOOLS_ROOT_DIR/scripts/build-all.sh
