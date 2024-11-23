@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 TOOLS_ROOT_DIR=$(readlink -f $(dirname $0))/..
 

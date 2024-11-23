@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 DSKSRV_ROOT_DIR=$TOOLS_ROOT_DIR/os8-disk-server
 DSKSRV_DIR=$DSKSRV_ROOT_DIR/os8diskserver
