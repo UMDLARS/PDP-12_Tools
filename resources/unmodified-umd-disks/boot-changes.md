@@ -405,6 +405,18 @@ Finally, we can save `BUILD` so that we don't have to redo everything if/when we
 .SAVE SYS BUILD
 ```
 
+### Disabling Pausing In The TTY
+By default, the `KL8E` TTY handler will pause for a few seconds every once in awhile.
+This does not serve much purpose in our setup (using a modern terminal emulator) and can be disabled.
+If this behavior is desired, this section may be skipped.
+
+To disable TTY pausing, the `SET TTY NO PAUSE` command may be used:
+```
+.SET TTY NO PAUSE
+
+.
+```
+
 ### Setting Up The Games Disk
 This section assumes that an undisturbed copy of `ock.rk05` from the PiDP-8/I project is mounted as disk 4 (`ock.rk05` is `disks/disk4.rk05`).
 Additionally, it is assumed that disk 3 is the UMD resource disk (`resources/unmodified-umd-disks/umd-resource.rk05` is `disks/disk3.rk05`).
