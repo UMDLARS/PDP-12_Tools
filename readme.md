@@ -67,7 +67,7 @@ You should now have a OS/8 command prompt on the minicom window opened by `os8-b
 ### Booting OS/8 under simh
 To boot OS/8 under simh, simply execute the `os8-boot.simh.sh` script:
 ```
-./os8-boot.simh.sh
+./scripts/os8-boot.simh.sh
 ```
 
 You should now have a simh window that you can run OS/8 commands in.
