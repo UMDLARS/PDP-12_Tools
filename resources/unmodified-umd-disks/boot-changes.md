@@ -3,11 +3,8 @@ Our OS/8 boot and games are derived from the "OCK boot" OS/8 disk image provided
 
 ## Required Resources
 * This repository.
-* 8tools: https://svn.so-much-stuff.com/svn/trunk/pdp8/8tools/
-* os8diskserver (included in this repo): https://github.com/drovak/os8diskserver
-* PDP-8 simh (we suggest git commit 524a98b; included in this repo): https://github.com/simh/simh
 * "OCK boot" ock.rk05 OS/8 image from the PiDP-8/I project: https://tangentsoft.com/pidp8i/wiki?name=Home
-* OS/8 FORTRAN IV LIBRARY Sources (we used those from the PiDP-8/I project under `src/os8/ock/LANGUAGE/FORTRAN4/`; these are included on the second side of the `disks/umd-resource.rk05` disk image in this repo).
+* OS/8 FORTRAN IV LIBRARY Sources (we used those from the PiDP-8/I project under `src/os8/ock/LANGUAGE/FORTRAN4/`; these are included on the second side of the `resources/unmodified-umd-disks/umd-resource.rk05` disk image in this repo).
 
 ## Disable The Init Script
 The mitigate some issues later, we'll want to first disable the INIT script provided by the PiDP-8/I ock.rk05 image. To do this, we'll use simh to execute the `SET SYS NO INIT` command on the image.
@@ -51,10 +48,11 @@ Goodbye
 ### Injecting The SerialDisk System Handler
 Since the SerialDisk handlers are not yet installed with BUILD, we'll need to use a tool from os8diskserver to inject the SerialDisk system handler. Assuming you're using the os8diskserver included with this repo:
 ```
-gcc os8diskserver/SerialDisk/tools/pal.c -o os8diskserver/SerialDisk/tools/pal
-make -C os8diskserver/SerialDisk/handler
-make -C os8diskserver/SerialDisk/installer
-./os8diskserver/SerialDisk/installer/handler_installer os8diskserver/SerialDisk/handler/sdsksy.bin path/to/ock.rk05
+ODS_PATH=os8-disk-server/os8diskserver/SerialDisk
+gcc $ODS_PATH/tools/pal.c -o $ODS_PATH/tools/pal
+make -C $ODS_PATH/handler
+make -C $ODS_PATH/installer
+$ODS_PATH/installer/handler_installer $ODS_PATH/handler/sdsksy.bin path/to/ock.rk05
 ```
 
 
@@ -64,7 +62,7 @@ So next we'll be copying over the source files for both the system and non-syste
 
 First, we'll unpack the ock.rk05 image. This can be done using the os8xplode script provided by 8tools:
 ```
-./os8xplode path/to/ock.rk05
+./8tools/os8xplode path/to/ock.rk05
 ```
 
 This will create the following new directories containing the contents of the ock.rk05 image:
@@ -75,8 +73,8 @@ From the os8diskserver project, copy the `sdsksy.pal` and `sdskns.pal` files loc
 
 To repack the ock.rk05 image, we use the `os8implode` and `mkdsk` scripts, also provided by 8tools:
 ```
-./os8implode ock.rk05
-./mkdsk ock.rk05.xml+
+./8tools/os8implode ock.rk05
+./8tools/mkdsk ock.rk05.xml+
 ```
 
 This will create a new `ock.rk05.new` disk image that now contains the source files for the two handlers.
@@ -87,10 +85,10 @@ We can now boot our image either on the PDP-12 system or under simh to properly 
 If it does not exist, create a `disks` directory in the root of this repository.
 If this directory does exist, make sure it is empty.
 Create copies of the following within the `disks` directory:
-* Your `ock.rk05.new` to `disks/boot-pdp12.rk05` and/or `disks/boot-simh.rk05`, depending on whether you'll be using the PDP-12 or SIMH for this process.
-* `unmodified-umd-disks/blank.rk05` to `disks/games.rk05`
-* `unmodified-umd-disks/umd-resource` to `disks/disk3.rk05`
-* An untouched copy of your `ock.rk05` to `disks/disk4.rk05`
+* Your `ock.rk05.new` to `os8-disk-server/disks/boot-pdp12.rk05` and/or `os8-disk-server/disks/boot-simh.rk05`, depending on whether you'll be using the PDP-12 or SIMH for this process.
+* `resources/unmodified-umd-disks/blank.rk05` to `os8-disk-server/disks/games.rk05`
+* `resources/unmodified-umd-disks/umd-resource` to `os8-disk-server/disks/disk3.rk05`
+* An untouched copy of your `ock.rk05` to `os8-disk-server/disks/disk4.rk05`
 
 Now, perform the instructions in this repository's main readme to boot OS/8 on the PDP-12 or in SIMH.
 
@@ -313,7 +311,7 @@ DSK=RK8E:RKB0
 ```
 
 Now, we can add our handlers.
-This section assumes that the first half of disk 3 (`disk3.rk05` under `disks`) contains built handlers (e.g., is a copy of `unmodified-umd-disks/umd-resource.rk05`).
+This section assumes that the first half of disk 3 (`disk3.rk05` under `disks`) contains built handlers (e.g., is a copy of `resources/unmodified-umd-disks/umd-resource.rk05`).
 All of the handlers except the SerialDisk handlers are present on SDA2 (second side of `disk3.rk05`/`umd-resource.rk05`).
 The SerialDisk handlers will still be on SYS from earlier.
 
@@ -409,7 +407,7 @@ Finally, we can save `BUILD` so that we don't have to redo everything if/when we
 
 ### Setting Up The Games Disk
 This section assumes that an undisturbed copy of `ock.rk05` from the PiDP-8/I project is mounted as disk 4 (`ock.rk05` is `disks/disk4.rk05`).
-Additionally, it is assumed that disk 3 is the UMD resource disk (`unmodified-umd-disks/umd-resource.rk05` is `disks/disk3.rk05`).
+Additionally, it is assumed that disk 3 is the UMD resource disk (`resources/unmodified-umd-disks/umd-resource.rk05` is `disks/disk3.rk05`).
 
 To setup the `games.rk05` games disk, we will simply copy the contents of the second half of the `ock.rk05` disk (should be mounted as `disk4.rk05`) to the games disk:
 ```
@@ -431,7 +429,7 @@ By default, the PiDP-8/I project does not include these libraries, but we can ad
 Additionally, PiDP-8/I includes the `CLK8A` library, which doesn't work on the PDP-12, instead of the `CLOCK` library.
 We can also replace the `CLK8A` library with the `CLOCK` library.
 
-This section assumes that disk 3 is the UMD resource disk (`unmodified-umd-disks/umd-resource.rk05` is `disks/disk3.rk05`).
+This section assumes that disk 3 is the UMD resource disk (`resources/unmodified-umd-disks/umd-resource.rk05` is `disks/disk3.rk05`).
 
 First, we'll compile the necessary FORTRAN libraries:
 ```
