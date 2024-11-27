@@ -86,12 +86,11 @@ This will create a new `ock.rk05.new` disk image that now contains the source fi
 We can now boot our image either on the PDP-12 system or under simh to properly install the SerialDisk handlers and setup everything else.
 
 If it does not exist, create a `disks` directory in the root of this repository.
-If this directory does exist, make sure it is empty.
-Create copies of the following within the `disks` directory:
-* Your `ock.rk05.new` to `os8-disk-server/disks/boot-pdp12.rk05` and/or `os8-disk-server/disks/boot-simh.rk05`, depending on whether you'll be using the PDP-12 or SIMH for this process.
-* `resources/unmodified-umd-disks/blank.rk05` to `os8-disk-server/disks/games.rk05`
-* `resources/unmodified-umd-disks/umd-resource` to `os8-disk-server/disks/disk3.rk05`
-* An untouched copy of your `ock.rk05` to `os8-disk-server/disks/disk4.rk05`
+The contents of `os8-disk-server/disks` should be as follows:
+* `boot-pdp12.rk05` (for PDP-12) or `boot-simh.rk05` (for simh): A copy of your `ock.rk05.new` disk.
+* `games.rk05`: Any rk05 disk images, this will not be used but must exist.
+* `disk3.rk05`: A copy of `resources/unmodified-umd-disks/umd-resource.rk05`.
+* `disk4.rk05`: Any rk05 disk images, this will not be used but must exist.
 
 Now, perform the instructions in this repository's main readme to boot OS/8 on the PDP-12 or in SIMH.
 
