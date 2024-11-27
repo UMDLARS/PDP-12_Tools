@@ -1,5 +1,9 @@
 # Boot Disk Image Generation
-Our OS/8 boot and games are derived from the "OCK boot" OS/8 disk image provided by the PiDP-8/I project.
+This document details how to recreate our boot (`boot-pdp12.rk05` and `boot-simh.rk05`) and games (`games.rk05`) disk images.
+
+Our OS/8 boot and games rk05 disk images are derived from the "OCK boot" OS/8 disk image provided by the PiDP-8/I project.
+We apply a set of changes on top of the PiDP-8/I image to enabling using os8diskserver and PDP-12 specific features.
+
 
 ## Required Resources
 * This repository.
@@ -69,9 +73,9 @@ This will create the following new directories containing the contents of the oc
 * ock.rk05.0
 * ock.rk05.1
 
-From the os8diskserver project, copy the `sdsksy.pal` and `sdskns.pal` files located under `SerialDisk/handler` into `ock.rk05.0` as `sdsksy.pa` and `sdskns.pa` respectively.
+From os8diskserver, copy the `sdsksy.pal` and `sdskns.pal` files located under `os8-disk-server/os8diskserver/SerialDisk/handler` into `ock.rk05.0` as `sdsksy.pa` and `sdskns.pa` respectively.
 
-To repack the ock.rk05 image, we use the `os8implode` and `mkdsk` scripts, also provided by 8tools:
+To repack the ock.rk05 image, we use the `os8implode` and `mkdsk` scripts, which are also provided by 8tools:
 ```
 ./8tools/os8implode ock.rk05
 ./8tools/mkdsk ock.rk05.xml+
