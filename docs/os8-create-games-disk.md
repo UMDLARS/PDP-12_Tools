@@ -14,6 +14,8 @@ The contents of `os8-disk-server/disks` should be as follows:
 * `disk3.rk05`: A copy of `resources/unmodified-umd-disks/umd-resource.rk05`.
 * `disk4.rk05`: A copy of ock.rk05.
 
+Boot OS/8 on either the PDP-12 or in SIMH using the instructions from this repository's main readme.
+
 To setup the `games.rk05` games disk, we will simply copy the contents of the second half of the `ock.rk05` disk to the games disk:
 ```
 .COPY SDA1:<SDB3:*.*
