@@ -1,9 +1,8 @@
 # Boot Disk Image Generation
-This document details how to recreate our boot (`boot-pdp12.rk05` and `boot-simh.rk05`) and games (`games.rk05`) disk images.
+This document details how to recreate our boot (`boot-pdp12.rk05` and `boot-simh.rk05`) disk images.
 
-Our OS/8 boot and games rk05 disk images are derived from the "OCK boot" OS/8 disk image provided by the PiDP-8/I project.
+Our OS/8 boot disk images are derived from the "OCK boot" OS/8 disk image provided by the PiDP-8/I project.
 We apply a set of changes on top of the PiDP-8/I image to enabling using os8diskserver and PDP-12 specific features.
-
 
 ## Required Resources
 * This repository.
@@ -421,23 +420,7 @@ To disable TTY pausing, the `SET TTY NO PAUSE` command may be used:
 .
 ```
 
-### Setting Up The Games Disk
-This section assumes that an undisturbed copy of `ock.rk05` from the PiDP-8/I project is mounted as disk 4 (`ock.rk05` is `disks/disk4.rk05`).
-Additionally, it is assumed that disk 3 is the UMD resource disk (`resources/unmodified-umd-disks/umd-resource.rk05` is `disks/disk3.rk05`).
 
-To setup the `games.rk05` games disk, we will simply copy the contents of the second half of the `ock.rk05` disk (should be mounted as `disk4.rk05`) to the games disk:
-```
-.COPY SDA1:<SDB3:*.*
-```
-
-Then we will copy over and build SPCWR3 (Space War) to the games disk:
-```
-.COPY SDA1:<SDB2:SPCWR3.12
-
-.COMPILE SDA1:<SDA1:SPCWR3.12
-ERRORS DETECTED: 0
-LINKS GENERATED: 106
-```
 
 ### Adding PDP-12 FORTRAN Libraries
 There are a few PDP-12 specific FORTRAN libraries that allow the use of PDP-12 specific features within FORTRAN.
