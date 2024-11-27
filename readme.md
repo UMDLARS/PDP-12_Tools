@@ -26,7 +26,7 @@ WARNING: If you run this script in an already setup environment, your configs an
 ## Updating
 To update this repo, you may use the update script:
 
-WARNING: This will reset any modifications you have made to files in this repo or its subrepos. Added files, like your OS/8 disk images, will be kept,
+WARNING: This will reset any modifications you have made to files in this repo or its subrepos. Added files, like your OS/8 disk images, will be kept.
 ```
 ./scripts/update.sh
 ```
