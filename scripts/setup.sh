@@ -8,6 +8,10 @@ if [ ! -d $CONFIG_DIR ]; then
     mkdir $CONFIG_DIR
 fi
 
+# Setup submodules.
+git -C $TOOLS_ROOT_DIR submodule init
+git -C $TOOLS_ROOT_DIR submodule update
+
 # Setup minicom config.
 $SCRIPTS_DIR/minicom-update-config.sh
 
