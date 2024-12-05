@@ -1,6 +1,6 @@
 #!/bin/bash
 
-TOOLS_ROOT_DIR=$(readlink -f $(dirname $0))/..
+TOOLS_ROOT_DIR=$(readlink -f $(dirname $0))/../..
 source $TOOLS_ROOT_DIR/scripts/detail/path-variables.sh
 
 # Reset any changes on submodules.
