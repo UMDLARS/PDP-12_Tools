@@ -15,4 +15,4 @@ SERVER_PID="$!"
 trap 'kill "$SERVER_PID" 2> /dev/null' EXIT
 
 # Run minicom.
-$SCRIPTS_DIR/minicom-run.sh
+$SCRIPTS_DIR/minicom-run.sh "$@"

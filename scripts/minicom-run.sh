@@ -5,4 +5,4 @@ source $TOOLS_ROOT_DIR/scripts/detail/path-variables.sh
 source $TOOLS_ROOT_DIR/scripts/detail/serial-config.sh
 
 # Run minicom on CONFIG_TTY_DEVICE
-$MINICOM_DIR/src/minicom -D $CONFIG_TTY_DEVICE PDP12
+$MINICOM_DIR/src/minicom -D $CONFIG_TTY_DEVICE PDP12 "$@"

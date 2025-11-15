@@ -6,4 +6,4 @@ source $TOOLS_ROOT_DIR/scripts/detail/path-variables.sh
 cd $DSKSRV_SIMH_ENV_DIR
 
 # Run simh
-$TOOLS_ROOT_DIR/simh/BIN/pdp8
+$TOOLS_ROOT_DIR/simh/BIN/pdp8 "$@"
